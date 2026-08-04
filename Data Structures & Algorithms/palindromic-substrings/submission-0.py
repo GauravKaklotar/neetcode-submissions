@@ -1,0 +1,21 @@
+class Solution:
+    def countSubstrings(self, s: str) -> int:
+
+        n = len(s)
+        start = 0
+
+        dp = [False] * n
+        max_len = 1
+        ans = 0
+
+        for i in range(n-1, -1, -1):
+            for j in range(n-1, i-1, -1):
+                
+                # Checking for j-i <= 2 to consider odd/even length of palindrome
+                if s[i] == s[j] and (j-i <= 2 or dp[j-1]):
+                    dp[j] = True
+                    ans += 1
+                else:
+                    dp[j] = False
+        
+        return ans 
